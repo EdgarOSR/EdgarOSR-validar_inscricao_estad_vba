@@ -6,18 +6,54 @@ Public Sub ValidarInscrEstadual(ByVal ValorInscricao As String, ByVal ValorUF As
     Dim IE As CLS_INSCR
     Set IE = New CLS_INSCR
     
-    IE.Inscricao = ValorInscricao
+    Let IE.Inscricao = ValorInscricao
+    Let IE.Estado = ValorUF
+    'Verifica o Estado selecionado pelo usuário
+    'e se a quantidade de caracteres digitada é válida
+    
+    If (IE.ValidarDigitos > 0) Then
+        DestinoResp.Caption = "Deve conter " & IE.ValidarDigitos & " caracteres"
+        Exit Sub
+    End If
     
     Select Case ValorUF
         Case "PR"
             DestinoResp.Caption = IE.ValidarPR
-        Case "SC"
-            DestinoResp.Caption = IE.ValidarSC
+        Case "GO"
+            DestinoResp.Caption = IE.ValidarGO
+        Case "AP"
+            DestinoResp.Caption = IE.ValidarAP
+        Case "RS"
+            DestinoResp.Caption = IE.ValidarRS
+        Case "SP"
+            DestinoResp.Caption = IE.ValidarSP
+        Case "RJ"
+            DestinoResp.Caption = IE.ValidarRJ
+        Case "DF", "AC"
+            DestinoResp.Caption = IE.ValidarDF
+        Case "MG"
+            DestinoResp.Caption = IE.ValidarMG
+        Case "AM"
+            DestinoResp.Caption = "Ainda não implementado"
+        Case "BA"
+            DestinoResp.Caption = "Ainda não implementado"
+        Case "MT"
+            DestinoResp.Caption = "Ainda não implementado"
+        Case "PE"
+            DestinoResp.Caption = "Ainda não implementado"
+        Case "RN"
+            DestinoResp.Caption = "Ainda não implementado"
+        Case "RO"
+            DestinoResp.Caption = "Ainda não implementado"
+        Case "RR"
+            DestinoResp.Caption = "Ainda não implementado"
+        Case "SE"
+            DestinoResp.Caption = "Ainda não implementado"
+        Case "TO"
+            DestinoResp.Caption = "Ainda não implementado"
         Case Else
-            DestinoResp.Caption = ""
-            Call MsgBox("Ainda não implementado para outras UF, somente PR e SC", vbExclamation, "MOD_INSCR_ValidarInscrEstadual")
+            DestinoResp.Caption = IE.ValidarSC
     End Select
-    
 End Sub
 
 Public Sub CarregarListaUF(ByVal CBox As MSForms.ComboBox)
@@ -74,4 +110,8 @@ Public Sub Main()
     Application.Visible = False
     Load FR_INSCRESTAD
     FR_INSCRESTAD.Show
+End Sub
+
+Public Sub MostrarExcel()
+    Application.Visible = True
 End Sub

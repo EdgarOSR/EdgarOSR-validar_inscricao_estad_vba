@@ -11,7 +11,7 @@ Public Sub ValidarInscrEstadual(ByVal ValorInscricao As String, ByVal ValorUF As
     'Verifica o Estado selecionado pelo usuário
     'e se a quantidade de caracteres digitada é válida
     
-    If (IE.ValidarDigitos > 0) Then
+    If (IE.ValidarDigitos <> "0") Then
         DestinoResp.Caption = "Deve conter " & IE.ValidarDigitos & " caracteres"
         Exit Sub
     End If
@@ -33,24 +33,20 @@ Public Sub ValidarInscrEstadual(ByVal ValorInscricao As String, ByVal ValorUF As
             DestinoResp.Caption = IE.ValidarDF
         Case "MG"
             DestinoResp.Caption = IE.ValidarMG
-        Case "AM"
-            DestinoResp.Caption = "Ainda não implementado"
         Case "BA"
-            DestinoResp.Caption = "Ainda não implementado"
+            DestinoResp.Caption = IE.ValidarBA
         Case "MT"
-            DestinoResp.Caption = "Ainda não implementado"
+            DestinoResp.Caption = IE.ValidarMT
         Case "PE"
-            DestinoResp.Caption = "Ainda não implementado"
+            DestinoResp.Caption = IE.ValidarPE
         Case "RN"
-            DestinoResp.Caption = "Ainda não implementado"
+            DestinoResp.Caption = IE.ValidarRN
         Case "RO"
-            DestinoResp.Caption = "Ainda não implementado"
+            DestinoResp.Caption = IE.ValidarRO
         Case "RR"
-            DestinoResp.Caption = "Ainda não implementado"
-        Case "SE"
-            DestinoResp.Caption = "Ainda não implementado"
+            DestinoResp.Caption = IE.ValidarRR
         Case "TO"
-            DestinoResp.Caption = "Ainda não implementado"
+            DestinoResp.Caption = IE.ValidarTO
         Case Else
             DestinoResp.Caption = IE.ValidarSC
     End Select
@@ -62,35 +58,36 @@ Public Sub CarregarListaUF(ByVal CBox As MSForms.ComboBox)
 
     CBox.Clear
     With CBox
-        .AddItem "RO"
         .AddItem "AC"
-        .AddItem "AM"
-        .AddItem "RR"
-        .AddItem "PA"
-        .AddItem "AP"
-        .AddItem "TO"
-        .AddItem "MA"
-        .AddItem "PI"
-        .AddItem "CE"
-        .AddItem "RN"
-        .AddItem "PB"
         .AddItem "AL"
-        .AddItem "SE"
+        .AddItem "AM"
+        .AddItem "AP"
         .AddItem "BA"
-        .AddItem "MG"
+        .AddItem "CE"
+        .AddItem "DF"
         .AddItem "ES"
-        .AddItem "RJ"
-        .AddItem "SP"
-        .AddItem "PR"
-        .AddItem "SC"
-        .AddItem "RS"
+        .AddItem "GO"
+        .AddItem "MA"
+        .AddItem "MG"
         .AddItem "MS"
         .AddItem "MT"
-        .AddItem "GO"
-        .AddItem "DF"
+        .AddItem "PA"
+        .AddItem "PB"
+        .AddItem "PE"
+        .AddItem "PI"
+        .AddItem "PR"
+        .AddItem "RJ"
+        .AddItem "RN"
+        .AddItem "RO"
+        .AddItem "RR"
+        .AddItem "RS"
+        .AddItem "SC"
+        .AddItem "SE"
+        .AddItem "SP"
+        .AddItem "TO"
     End With
 
-    CBox.ListIndex = 19
+    CBox.ListIndex = 17
     
     On Error GoTo 0
     
@@ -115,3 +112,8 @@ End Sub
 Public Sub MostrarExcel()
     Application.Visible = True
 End Sub
+
+Public Function TESTEX(ByVal valor As String) As String
+    valor = Left$(valor, 10)
+    TESTEX = Replace(valor, Mid$(valor, 3, 2), "")
+End Function
